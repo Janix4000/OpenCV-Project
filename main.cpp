@@ -1,6 +1,20 @@
+#include <opencv2/imgcodecs.hpp>
+#include <opencv2/highgui.hpp>
+#include <opencv2/imgproc.hpp>
 #include <iostream>
 
+using namespace cv;
+using namespace std;
+
+
+/////////////////  Images  //////////////////////
+
 int main() {
-	std::cout << "Hello World!\n";
-	return 0;
+
+    string path = "Resources/test.png";
+    Mat img = imread(path);
+    imshow("Image", img);
+    waitKey(0);
+    return 0;
+
 }
