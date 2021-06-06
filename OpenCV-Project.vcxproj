@@ -149,6 +149,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="app.hpp" />
     <ClInclude Include="document_corners_finder.hpp" />
     <ClInclude Include="document_cropper.hpp" />
     <ClInclude Include="document_gray_scale_preprocessor.hpp" />

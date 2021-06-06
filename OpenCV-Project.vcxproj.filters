@@ -35,5 +35,8 @@
     <ClInclude Include="document_via_color_preprocess.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="app.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
