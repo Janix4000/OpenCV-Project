@@ -9,6 +9,6 @@
 
 class DocumentPreprocessor {
 public:
-	virtual cv::Mat get_preprocessed(const cv::Mat& src) = 0;
+	virtual void get_preprocessed(const cv::Mat& src, cv::Mat& dst) = 0;
 	virtual void show_preprocess() const = 0;
 };

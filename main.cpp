@@ -10,6 +10,7 @@
 #include <iterator>
 
 #include "document_cropper.hpp"
+#include "document_via_color_preprocess.hpp"
 
 
 cv::Mat imgOriginal, imgGray, imgBlur, imgCanny, imgThre, imgDil, imgErode, imgWarp, imgCrop;
@@ -17,38 +18,24 @@ int w = 420, h = 596;
 
 
 int main() {
-
-	//const std::string path = "Resources/paper.jpg";
-	//imgOriginal = cv::imread(path);
-	//const auto r = cv::selectROI("Select region of interest", imgOriginal);
-	//const auto desired_img = imgOriginal(r);
-	
-
-	//cv::imshow("Image", desired_img);
-	////imshow("Image Dilation", imgThre);
-	////imshow("Image Warp", imgWarp);
-	//cv::imshow("Image Crop", imgCrop);
-	//cv::waitKey(0);
-
-
 	cv::VideoCapture cap(0);
 	cv::Mat img;
-	DocumentCropper document_cropper;
+	cv::Mat doc_img;
 
+	DocumentCropper<DocumentViaColorPreprocessor> document_cropper;
+	//DocumentCropper<DocumentGrayScalePreprocessor> document_cropper;
 	while (true) {
-
 		cap.read(img);
-		cv::Mat doc_img;
+		document_cropper.find_document(img);
 
 		cv::imshow("Image", img);
-		document_cropper.find_document(img);
 		if (document_cropper.is_document_found()) {
-			doc_img = document_cropper.get_cropped_document();
+			document_cropper.get_cropped_document(doc_img, { 600, 900 });
 			cv::imshow("Document", doc_img);
-			document_cropper.show_preprocess();
 		}
+		document_cropper.show_preprocess();
+
 		cv::waitKey(1);
 	}
-
 	return 0;
 }

@@ -5,12 +5,14 @@
 #include "document_corners_finder.hpp"
 #include "document_gray_scale_preprocessor.hpp"
 
+
+template <typename Preprocessor>
 class DocumentCropper {
 	static constexpr size_t max_no_found_tries = 8;
 	static constexpr int default_width = 420;
 	static constexpr int default_height = 600;
 
-	DocumentCornersFinder<DocumentGrayScalePreprocessor> corner_finder; 
+	DocumentCornersFinder<Preprocessor> corner_finder;
 	Points corners;
 	size_t failed_tries = 0;
 	cv::Mat img;
@@ -18,7 +20,7 @@ class DocumentCropper {
 public:
 
 
-	bool find_document(cv::Mat& src) {
+	bool find_document(const cv::Mat& src) {
 		const auto contours = corner_finder.get_document_corners(src);
 		if (contours.empty()) {
 			img = src;
@@ -40,16 +42,17 @@ public:
 		return failed_tries < max_no_found_tries && !corners.empty();
 	}
 
-	cv::Mat get_cropped_document(cv::Size desired_size = { default_height, default_width}) const {
+	bool get_cropped_document(cv::Mat& dst, cv::Size desired_size = { default_height, default_width }) const {
 		if (is_document_found()) {
 			auto warp_img = get_warp(desired_size.width, desired_size.height);
 			int cropVal = 0;
 			const cv::Rect roi = { cropVal, cropVal, desired_size.width - cropVal * 2, desired_size.height - cropVal * 2 };
-			const auto dst = warp_img(roi);
-			return dst;
+			dst = warp_img(roi);
+			return true;
 		}
 		else {
-			return cv::Mat(desired_size.width, desired_size.height, CV_8SC3, cv::Scalar());
+			dst = cv::Mat(desired_size.width, desired_size.height, CV_8SC3, cv::Scalar());
+			return false;
 		}
 	}
 

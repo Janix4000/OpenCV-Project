@@ -11,17 +11,16 @@
 class DocumentGrayScalePreprocessor : public DocumentPreprocessor {
 	cv::Mat img_gray, img_blur, img_dil, img_canny;
 public:
-	cv::Mat get_preprocessed(const cv::Mat& src) override
+
+	void get_preprocessed(const cv::Mat& src, cv::Mat& dst) override
 	{
-		cv::Mat res;
 		cv::cvtColor(src, img_gray, cv::COLOR_BGR2GRAY);
 		cv::GaussianBlur(img_gray, img_blur, cv::Size(3, 3), 3, 0);
 		cv::Canny(img_blur, img_canny, 25, 75);
 		const auto kernel = cv::getStructuringElement(cv::MORPH_RECT, cv::Size(3, 3));
 		cv::dilate(img_canny, img_dil, kernel);
 		//erode(imgDil, imgErode, kernel);
-		res = img_dil;
-		return res;
+		dst = img_dil;
 	}
 	void show_preprocess() const override {
 		cv::imshow("Image Dilation", img_dil);

@@ -19,13 +19,14 @@ template <typename Preprocessor>
 class DocumentCornersFinder {
 	Preprocessor preprocessor;
 	mutable cv::Mat img;
+	cv::Mat preprocessed_img;
 	Points prev_corners;
 
 public:
 	static constexpr float min_area_ratio = 0.25f;
 
 	Points get_document_corners(const cv::Mat& src) {
-		const auto preprocessed_img = preprocessor.get_preprocessed(src);
+		preprocessor.get_preprocessed(src, preprocessed_img);
 		const auto initial_points = get_contours(preprocessed_img);
 		if (initial_points.empty()) {
 			return {};
@@ -41,8 +42,8 @@ public:
 	void show_preprocess(const bool show_sub = true) const {
 		if (prev_corners.size() > 0) {
 			draw_points({ 255, 0, 0 });
+			cv::imshow("Corners", img);
 		}
-		cv::imshow("Corners", img);
 		if (show_sub) {
 			preprocessor.show_preprocess();
 		}
