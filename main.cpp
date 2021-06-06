@@ -1,7 +1,10 @@
-#include "app.hpp"
+#include "window.hpp"
 
 
 int main() {
-	App app;
-	return app.run();
+   
+	Window window;
+	//App app;
+	//return app.run();
+    return window.run();
 }

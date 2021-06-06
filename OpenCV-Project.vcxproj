@@ -146,7 +146,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="document_gray_scale_preprocessor.cpp" />
+    <ClCompile Include="document_via_color_preprocess.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="app.cpp" />
+    <ClCompile Include="window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app.hpp" />
@@ -155,6 +159,7 @@
     <ClInclude Include="document_gray_scale_preprocessor.hpp" />
     <ClInclude Include="document_preprocesor.hpp" />
     <ClInclude Include="document_via_color_preprocess.hpp" />
+    <ClInclude Include="window.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

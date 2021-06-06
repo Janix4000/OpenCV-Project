@@ -4,7 +4,6 @@
 #include <opencv2/imgcodecs.hpp>
 #include <opencv2/highgui.hpp>
 #include <opencv2/imgproc.hpp>
-//#include <opencv2/tracking.hpp>
 #pragma warning(pop)
 
 class DocumentPreprocessor {
