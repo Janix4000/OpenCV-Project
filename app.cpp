@@ -35,9 +35,11 @@ void App::show() const
 	}
 }
 
+
+
 App::App() : cap{ 0 },
 doc_size{ int(cap.get(cv::CAP_PROP_FRAME_HEIGHT) / 1.41), cap.get(cv::CAP_PROP_FRAME_HEIGHT) },
-doc_img(doc_size.width, doc_size.height, CV_8SC3, cv::Scalar())
+doc_img(doc_size.width, doc_size.height, CV_8UC3, cv::Scalar())
 {
 }
 
@@ -45,7 +47,7 @@ App::~App()
 {
 }
 
-const cv::Mat& App::get_document_img() const
+cv::Mat App::get_document_img() const
 {
 	return doc_img;
 }

@@ -12,6 +12,7 @@
 #include "document_via_color_preprocess.hpp"
 
 
+
 class App
 {
 	cv::VideoCapture cap;
@@ -20,6 +21,7 @@ class App
 	cv::Mat doc_img;
 	DocumentCropper<DocumentViaColorPreprocessor> document_cropper;
 	bool should_show_prep = true;
+
 public:
 	App();
 	~App();
@@ -29,6 +31,7 @@ public:
 
 	void update();
 	void show() const;
-	const cv::Mat& get_document_img() const;
+	cv::Mat get_document_img() const;
+	cv::Mat get_img() const { return img; }
 };
 

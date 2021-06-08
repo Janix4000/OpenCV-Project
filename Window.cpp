@@ -2,9 +2,7 @@
 
 
 #include <SFML/Window/Event.hpp>
-#include <SFML/Graphics/Image.hpp>
-#include <SFML/Graphics/Texture.hpp>
-#include <SFML/Graphics/Sprite.hpp>
+
 #include "imgui.h" // necessary for ImGui::*, imgui-SFML.h doesn't include imgui.h
 #include "imgui-SFML.h" // for ImGui::SFML::* functions and SFML-specific overloads
 
@@ -23,13 +21,13 @@ Window::~Window()
 int Window::run()
 {
 	while (window.isOpen()) {
-		update();
-		render();
+		full_update();
+		full_render();
 	}
 	return 0;
 }
 
-void Window::update()
+void Window::full_update()
 {
 	sf::Event event;
 	while (window.pollEvent(event)) {
@@ -42,30 +40,38 @@ void Window::update()
 
 	const auto dt = deltaClock.restart();
 
-	app.update();
+	user_update(dt.asSeconds());
 
 	ImGui::SFML::Update(window, dt);
 }
 
-void Window::render()
+void Window::full_render()
 {
 	ImGui::Begin("Hello, world!");
 
-	// render
-	const auto& img = app.get_document_img();
-	sf::Image image;
-	image.create(img.cols, img.rows, img.ptr());
-	sf::Texture texture;
-	texture.loadFromImage(image);
-	sf::Sprite sprite;
-	sprite.setTexture(texture);
-
-
-	ImGui::Image(sprite);
+	user_render();
 
 	ImGui::End();
-
 	window.clear();
 	ImGui::SFML::Render(window);
 	window.display();
+}
+
+
+
+void Window::user_update(const float dt)
+{
+	app.update();
+}
+
+void Window::user_render()
+{
+	img = app.get_img();
+	if (!img.empty()) {
+		cv::cvtColor(img, imgRGBA, cv::COLOR_BGR2RGBA);
+		image.create(imgRGBA.cols, imgRGBA.rows, imgRGBA.ptr());
+		texture.loadFromImage(image);
+		sprite.setTexture(texture);
+		ImGui::Image(sprite);
+	}
 }
