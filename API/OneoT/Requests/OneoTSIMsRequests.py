@@ -9,14 +9,14 @@ def get_sims():
         total
         sims"""
     url = endpoint_get_sims
-    log(url)
+    # log(url)
     resp = get_url(url)
     return resp
 
 
 def get_sim_cost(iccid):
     url = endpoint_get_sim_cost + str(iccid)
-    log_http(url)
+    # log_http(url)
     resp = get_url(url)
     if "SIM not found" in resp.get('error_description', ""):
         raise KeyError
@@ -25,7 +25,7 @@ def get_sim_cost(iccid):
 
 def get_sim_diagnostics(iccid):
     url = endpoint_get_diagnostics + str(iccid)
-    log_http(url)
+    # log_http(url)
     resp = get_url(url)
     print(resp)
     if "SIM not found" in resp.get('error_description', ""):
@@ -35,7 +35,7 @@ def get_sim_diagnostics(iccid):
 
 def get_sim_sessions(iccid):
     url = endpoint_get_sim_sessions + str(iccid)
-    log_http(url)
+    # log_http(url)
     resp = get_url(url)
     if "SIM not found" in resp.get('error_description', ""):
         raise KeyError

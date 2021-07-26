@@ -3,9 +3,10 @@ from API.OneoT.Definitions.OneOTEndpoints import *
 from API.OneoT.Requests.OneOTHttpRequests import *
 import json
 
+
 def get_access_token():
     url = endpoint_get_oauth_token
-    log_http(url)
+    # log_http(url)
     grant_type = "password"
     data_url = "grant_type={}&username={}&client_id={}&password={}".format(grant_type, API_username, API_client_id,
                                                                            API_password)
@@ -16,7 +17,7 @@ def get_access_token():
 
 def refresh_access_token():
     url = endpoint_get_oauth_token
-    log_http(url)
+    # log_http(url)
     grant_type = "password"
     data_url = "grant_type={}&username={}&client_id={}&password={}".format(grant_type, API_username, API_client_id,
                                                                            API_password)
@@ -38,6 +39,7 @@ def get_credentials(refresh_token=False, get_new_credentials=False):
                           refresh_token=credentials_data['refresh_token'])
     credentials = read_credentials()
     return credentials
+
 
 if __name__ == '__main__':
     data = get_credentials(get_new_credentials=True)
