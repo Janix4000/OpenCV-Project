@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-from airly_libs.FilesManager import __version__
+from airly_libs import __version__
 
 setup(
     name='airly_libs',
