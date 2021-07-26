@@ -1,7 +1,7 @@
 from os import path
 import pathlib
 import os
-from  FilesManager.FileManagerPaths import *
+from .FileManagerPaths import *
 
 
 def check_if_file_exists(filepath):
