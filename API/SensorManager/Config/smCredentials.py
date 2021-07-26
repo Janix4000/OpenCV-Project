@@ -1,0 +1,1 @@
+sensor_manager_api_auth_token = "#HERE ADD YOUR TOKEN"

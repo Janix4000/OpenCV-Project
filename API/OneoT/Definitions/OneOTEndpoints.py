@@ -1,0 +1,6 @@
+host = " https://api.1ot.mobi/v1/"
+endpoint_get_sims = host + "get_sims"
+endpoint_get_diagnostics = host + "diagnostics?iccid="
+endpoint_get_sim_cost = host + "get_sim_cost?iccid="
+endpoint_get_sim_sessions = host + "get_sim_sessions?iccid="
+endpoint_get_oauth_token = host + "oauth/token?"
