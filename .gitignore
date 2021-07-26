@@ -1,5 +1,6 @@
 venv/
 .idea/
+test/
 # Created by https://www.toptal.com/developers/gitignore/api/python,visualstudiocode,pycharm,windows
 # Edit at https://www.toptal.com/developers/gitignore?templates=python,visualstudiocode,pycharm,windows
 
